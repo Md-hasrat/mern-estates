@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess,signInFailure } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
-export default function SignIp() {
+export default function SignIn() {
 
   const [formData , setFormData] =useState({})
   const {loading ,error} =useSelector((state)=>state.user);
@@ -34,7 +35,7 @@ export default function SignIp() {
         return;
       }
       dispatch(signInSuccess(data))
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
@@ -49,6 +50,7 @@ export default function SignIp() {
         <button disabled ={loading}  className='bg-slate-700 text-white rounded-lg uppercase p-3 hover:opacity-95 disabled: opacity-80' >
          {loading ? 'LOading..': 'Sign-In'}
         </button>
+        <OAuth/>
       </form>
       <div className='flex gap-2 mt-5'>
         <p>Don't have an account?</p>
